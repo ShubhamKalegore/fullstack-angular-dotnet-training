@@ -1,18 +1,28 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Header } from './day1/header/header';
-import { Footer } from './day1/footer/footer';
-import { CustomDirective } from './day1/custom-directive/custom-directive';
-import { Home } from './day1/home/home';
-import { UserForm } from './day1/user-form/user-form';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Header, Footer, Home, UserForm],
+  imports: [RouterOutlet, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular';
+
+  selectedDay = 'day0';
+
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe(event => {
+        this.selectedDay = event.urlAfterRedirects.split('/')[1] || 'day0';
+      });
+  }
+
+  navigateDay() {
+    this.router.navigate([this.selectedDay]);
+  }
 }

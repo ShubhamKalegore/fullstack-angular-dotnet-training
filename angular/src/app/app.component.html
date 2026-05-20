@@ -1,8 +1,14 @@
-<app-header></app-header>
+<div class="container mt-4">
 
-<div class="container mt-3">
-  <app-home></app-home>
-  <app-user-form></app-user-form>
+  <select
+    class="form-select w-25 mb-4"
+    [(ngModel)]="selectedDay"
+    (change)="navigateDay()"
+  >
+    <option value="day0">Day 0</option>
+    <option value="day1">Day 1</option>
+  </select>
+
+  <router-outlet></router-outlet>
+
 </div>
-
-<app-footer></app-footer>

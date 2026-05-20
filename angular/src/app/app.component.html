@@ -1,4 +1,7 @@
-<div class="container mt-4">
+<div
+  class="container app-shell"
+  [class.controls-centered]="isControlsCentered"
+>
 
   <div class="row g-4 align-items-start mb-4">
 
@@ -9,7 +12,7 @@
         class="form-label"
         for="contentDay"
       >
-        Select content day (Completed)
+        Select day-wise content (Completed)
       </label>
 
       <select
@@ -83,7 +86,7 @@
         class="form-label"
         for="trainingDay"
       >
-        Select training plan day
+        Select training plan
       </label>
 
       <select

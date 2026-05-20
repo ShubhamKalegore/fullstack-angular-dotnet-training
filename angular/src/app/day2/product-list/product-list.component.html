@@ -1,5 +1,10 @@
 <h2>Product List</h2>
 
+<p class="text-muted">
+  Custom pipe demo: product names are shown in raw format and after using the
+  <code>capitalize</code> pipe.
+</p>
+
 <button class="btn btn-primary mb-3" (click)="toggleProducts()">
   Toggle Products
 </button>
@@ -12,9 +17,16 @@
       class="list-group-item"
       *ngFor="let product of products"
     >
-      {{ product.name | capitalize }}
-      -
-      Rs. {{ product.price }}
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <small class="text-muted d-block">Before pipe: {{ product.name }}</small>
+          <strong>After pipe: {{ product.name | capitalize }}</strong>
+        </div>
+
+        <span class="badge bg-success">
+          Rs. {{ product.price }}
+        </span>
+      </div>
     </li>
 
   </ul>

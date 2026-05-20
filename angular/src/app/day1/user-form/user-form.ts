@@ -12,4 +12,8 @@ export class UserForm {
 
   name: string = '';
   age: number = 0;
+
+  buttonClick() {
+    alert("Button Clicked!");
+  }
 }

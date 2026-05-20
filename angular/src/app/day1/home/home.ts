@@ -8,4 +8,9 @@ import { HighlightDirective } from '../highlight';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {}
+export class Home {
+
+  buttonClick() {
+    alert("Button Clicked!");
+  }
+}

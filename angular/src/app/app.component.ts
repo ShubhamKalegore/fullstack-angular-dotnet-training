@@ -28,6 +28,10 @@ export class AppComponent {
   ];
   trainingDays = TRAINING_DAYS;
 
+  get isControlsCentered() {
+    return !this.showContentDay && !this.showTrainingPlan;
+  }
+
   constructor(private router: Router) {
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))

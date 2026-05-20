@@ -1,0 +1,15 @@
+.app-shell {
+  padding-top: 1.5rem;
+}
+
+.controls-centered {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 0;
+}
+
+.controls-centered .row {
+  width: 100%;
+}

@@ -1,58 +1,112 @@
 <div class="container mt-4">
 
-  <div class="row g-3 mb-4">
-    <div class="col-md-4">
-      <label class="form-label" for="contentDay">Select content day</label>
+  <div class="row g-4 mb-4">
+
+    <!-- Content Day -->
+    <div class="col-md-6">
+
+      <label
+        class="form-label"
+        for="contentDay"
+      >
+        Select content day (Completed)
+      </label>
+
       <select
         id="contentDay"
         class="form-select"
         [(ngModel)]="selectedDay"
         (change)="navigateDay()"
       >
-        <option value="day0">Day 0</option>
-        <option value="day1">Day 1</option>
-        <option value="day2">Day 2</option>
-        <option value="day3">Day 3</option>
+
+        <option
+          *ngFor="let day of contentDays"
+          [value]="day.value"
+        >
+          {{ day.label }}
+        </option>
+
       </select>
+
+      <div class="form-check mt-2">
+
+        <input
+          id="showContentDay"
+          class="form-check-input"
+          type="checkbox"
+          [(ngModel)]="showContentDay"
+        >
+
+        <label
+          class="form-check-label"
+          for="showContentDay"
+        >
+          Show content day
+        </label>
+
+      </div>
+
     </div>
 
-    <div class="col-md-4">
-      <label class="form-label" for="trainingDay">Select training plan day</label>
+    <!-- Training Plan Day -->
+    <div class="col-md-6">
+
+      <label
+        class="form-label"
+        for="trainingDay"
+      >
+        Select training plan day
+      </label>
+
       <select
         id="trainingDay"
         class="form-select"
         [(ngModel)]="selectedTrainingDay"
         (change)="navigateTrainingDay()"
       >
+
         <option
           *ngFor="let day of trainingDays"
           [value]="day.day"
         >
           {{ day.day | titlecase }}
         </option>
-      </select>
-    </div>
 
-    <div class="col-md-4 d-flex align-items-end">
-      <div class="form-check mb-2">
+      </select>
+
+      <div class="form-check mt-2">
+
         <input
           id="showTrainingPlan"
           class="form-check-input"
           type="checkbox"
           [(ngModel)]="showTrainingPlan"
         >
-        <label class="form-check-label" for="showTrainingPlan">
+
+        <label
+          class="form-check-label"
+          for="showTrainingPlan"
+        >
           Show training plan
         </label>
+
       </div>
+
     </div>
+
   </div>
 
+  <!-- Training Plan -->
   <app-training-plan
     *ngIf="showTrainingPlan"
     [selectedDay]="selectedTrainingDay"
-  ></app-training-plan>
+  >
+  </app-training-plan>
 
-  <router-outlet></router-outlet>
+  <!-- Routed Day Content -->
+  <router-outlet
+    *ngIf="showContentDay"
+  >
+  </router-outlet>
 
 </div>

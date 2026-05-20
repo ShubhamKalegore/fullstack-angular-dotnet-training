@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
+import { CONTENT_DAYS } from './content-days';
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
 import { TRAINING_DAYS } from './training-plan/training-days';
 
@@ -17,8 +18,9 @@ export class AppComponent {
 
   selectedDay = 'day0';
   selectedTrainingDay = 'day1';
+  showContentDay = true;
   showTrainingPlan = false;
-  contentDays = ['day0', 'day1', 'day2', 'day3'];
+  contentDays = CONTENT_DAYS;
   trainingDays = TRAINING_DAYS;
 
   constructor(private router: Router) {
@@ -36,11 +38,15 @@ export class AppComponent {
   }
 
   navigateTrainingDay() {
-    this.selectedDay = this.contentDays.includes(this.selectedTrainingDay)
+    this.selectedDay = this.isContentDayAvailable(this.selectedTrainingDay)
       ? this.selectedTrainingDay
       : 'day0';
 
     this.router.navigate([this.selectedDay]);
+  }
+
+  private isContentDayAvailable(dayValue: string) {
+    return this.contentDays.some(day => day.value === dayValue);
   }
 
   private syncTrainingDayWithContentDay() {

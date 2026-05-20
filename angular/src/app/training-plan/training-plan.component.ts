@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-import { TRAINING_DAYS, TrainingDay } from './training-days';
+import { TrainingDay } from './training-days';
 
 @Component({
   selector: 'app-training-plan',
@@ -12,8 +12,7 @@ import { TRAINING_DAYS, TrainingDay } from './training-days';
 })
 export class TrainingPlanComponent {
   @Input() selectedDay = 'day1';
-
-  trainingDays = TRAINING_DAYS;
+  @Input() trainingDays: TrainingDay[] = [];
 
   get dayPlan(): TrainingDay | undefined {
     return this.trainingDays.find(day => day.day === this.selectedDay);

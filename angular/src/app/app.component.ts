@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
 import { CONTENT_DAYS } from './content-days';
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
-import { TRAINING_DAYS } from './training-plan/training-days';
+import { DOTNET_TRAINING_DAYS, TRAINING_DAYS } from './training-plan/training-days';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +17,15 @@ import { TRAINING_DAYS } from './training-plan/training-days';
 export class AppComponent {
 
   selectedDay = 'day0';
+  selectedTechnology = 'angular';
   selectedTrainingDay = 'day1';
-  showContentDay = true;
+  showContentDay = false;
   showTrainingPlan = false;
   contentDays = CONTENT_DAYS;
+  technologyOptions = [
+    { value: 'angular', label: 'Angular' },
+    { value: 'dotnet', label: '.NET' }
+  ];
   trainingDays = TRAINING_DAYS;
 
   constructor(private router: Router) {
@@ -33,6 +38,7 @@ export class AppComponent {
   }
 
   navigateDay() {
+    this.useAngularTrainingDays();
     this.syncTrainingDayWithContentDay();
     this.router.navigate([this.selectedDay]);
   }
@@ -45,8 +51,22 @@ export class AppComponent {
     this.router.navigate([this.selectedDay]);
   }
 
+  changeTechnology() {
+    this.trainingDays = this.selectedTechnology === 'dotnet'
+      ? DOTNET_TRAINING_DAYS
+      : TRAINING_DAYS;
+
+    this.selectedTrainingDay = this.trainingDays[0]?.day || 'day1';
+    this.navigateTrainingDay();
+  }
+
   private isContentDayAvailable(dayValue: string) {
     return this.contentDays.some(day => day.value === dayValue);
+  }
+
+  private useAngularTrainingDays() {
+    this.selectedTechnology = 'angular';
+    this.trainingDays = TRAINING_DAYS;
   }
 
   private syncTrainingDayWithContentDay() {

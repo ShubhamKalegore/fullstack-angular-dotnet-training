@@ -7,13 +7,13 @@ import { catchError, Observable, throwError } from 'rxjs';
 })
 export class PostService {
 
-  private apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+  private apiUrl = 'https://json-placeholder.mock.beeceptor.com';
 
   constructor(private http: HttpClient) {}
 
   getPosts(): Observable<any> {
 
-    return this.http.get(this.apiUrl).pipe(
+    return this.http.get(`${this.apiUrl}/posts`).pipe(
 
       catchError(error => {
 

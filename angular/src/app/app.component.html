@@ -1,9 +1,9 @@
 <div class="container mt-4">
 
-  <div class="row g-4 mb-4">
+  <div class="row g-4 align-items-start mb-4">
 
     <!-- Content Day -->
-    <div class="col-md-6">
+    <div class="col-md-4">
 
       <label
         class="form-label"
@@ -48,8 +48,36 @@
 
     </div>
 
+    <!-- Technology -->
+    <div class="col-md-4">
+
+      <label
+        class="form-label"
+        for="trainingTechnology"
+      >
+        Select technology
+      </label>
+
+      <select
+        id="trainingTechnology"
+        class="form-select"
+        [(ngModel)]="selectedTechnology"
+        (change)="changeTechnology()"
+      >
+
+        <option
+          *ngFor="let technology of technologyOptions"
+          [value]="technology.value"
+        >
+          {{ technology.label }}
+        </option>
+
+      </select>
+
+    </div>
+
     <!-- Training Plan Day -->
-    <div class="col-md-6">
+    <div class="col-md-4">
 
       <label
         class="form-label"
@@ -69,7 +97,7 @@
           *ngFor="let day of trainingDays"
           [value]="day.day"
         >
-          {{ day.day | titlecase }}
+          {{ day.day.replace('day', 'Day ') }}
         </option>
 
       </select>
@@ -100,6 +128,7 @@
   <app-training-plan
     *ngIf="showTrainingPlan"
     [selectedDay]="selectedTrainingDay"
+    [trainingDays]="trainingDays"
   >
   </app-training-plan>
 

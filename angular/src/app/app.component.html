@@ -12,6 +12,7 @@
         <option value="day0">Day 0</option>
         <option value="day1">Day 1</option>
         <option value="day2">Day 2</option>
+        <option value="day3">Day 3</option>
       </select>
     </div>
 
@@ -21,6 +22,7 @@
         id="trainingDay"
         class="form-select"
         [(ngModel)]="selectedTrainingDay"
+        (change)="navigateTrainingDay()"
       >
         <option
           *ngFor="let day of trainingDays"

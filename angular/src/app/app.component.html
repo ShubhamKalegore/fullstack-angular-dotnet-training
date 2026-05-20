@@ -1,13 +1,55 @@
 <div class="container mt-4">
 
-  <select
-    class="form-select w-25 mb-4"
-    [(ngModel)]="selectedDay"
-    (change)="navigateDay()"
-  >
-    <option value="day0">Day 0</option>
-    <option value="day1">Day 1</option>
-  </select>
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <label class="form-label" for="contentDay">Select content day</label>
+      <select
+        id="contentDay"
+        class="form-select"
+        [(ngModel)]="selectedDay"
+        (change)="navigateDay()"
+      >
+        <option value="day0">Day 0</option>
+        <option value="day1">Day 1</option>
+        <option value="day2">Day 2</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label" for="trainingDay">Select training plan day</label>
+      <select
+        id="trainingDay"
+        class="form-select"
+        [(ngModel)]="selectedTrainingDay"
+      >
+        <option
+          *ngFor="let day of trainingDays"
+          [value]="day.day"
+        >
+          {{ day.day | titlecase }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-4 d-flex align-items-end">
+      <div class="form-check mb-2">
+        <input
+          id="showTrainingPlan"
+          class="form-check-input"
+          type="checkbox"
+          [(ngModel)]="showTrainingPlan"
+        >
+        <label class="form-check-label" for="showTrainingPlan">
+          Show training plan
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <app-training-plan
+    *ngIf="showTrainingPlan"
+    [selectedDay]="selectedTrainingDay"
+  ></app-training-plan>
 
   <router-outlet></router-outlet>
 

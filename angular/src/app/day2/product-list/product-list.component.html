@@ -1,0 +1,22 @@
+<h2>Product List</h2>
+
+<button class="btn btn-primary mb-3" (click)="toggleProducts()">
+  Toggle Products
+</button>
+
+<div *ngIf="showProducts">
+
+  <ul class="list-group">
+
+    <li
+      class="list-group-item"
+      *ngFor="let product of products"
+    >
+      {{ product.name | capitalize }}
+      -
+      ₹{{ product.price }}
+    </li>
+
+  </ul>
+
+</div>

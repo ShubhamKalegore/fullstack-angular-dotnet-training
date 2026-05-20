@@ -1,0 +1,39 @@
+<section class="training-plan border rounded p-3 mb-4" *ngIf="dayPlan as plan">
+  <p class="text-uppercase text-secondary fw-semibold mb-1">
+    {{ plan.day }}
+  </p>
+
+  <h2 class="h4 mb-3">
+    {{ plan.title }}
+  </h2>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <h3 class="h6">Topics</h3>
+      <ul class="mb-0">
+        <li *ngFor="let topic of plan.topics">{{ topic }}</li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h3 class="h6">Learning Objectives</h3>
+      <ul class="mb-0">
+        <li *ngFor="let objective of plan.learningObjectives">{{ objective }}</li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h3 class="h6">Sample Questions</h3>
+      <ul class="mb-0">
+        <li *ngFor="let question of plan.sampleQuestions">{{ question }}</li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h3 class="h6">Tasks</h3>
+      <ul class="mb-0">
+        <li *ngFor="let task of plan.tasks">{{ task }}</li>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -136,9 +136,13 @@
   </app-training-plan>
 
   <!-- Routed Day Content -->
-  <router-outlet
+  <section
     *ngIf="showContentDay"
+    class="content-panel border rounded bg-white shadow-sm"
   >
-  </router-outlet>
+
+    <router-outlet></router-outlet>
+
+  </section>
 
 </div>

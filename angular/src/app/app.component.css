@@ -13,3 +13,8 @@
 .controls-centered .row {
   width: 100%;
 }
+
+.content-panel {
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}

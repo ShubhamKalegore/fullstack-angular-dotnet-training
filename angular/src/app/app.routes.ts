@@ -29,6 +29,13 @@ export const routes: Routes = [
             import('./day4/day4.routes')
                 .then(m => m.DAY4_ROUTES)
     },
+    {
+        path: 'day5',
+
+        loadChildren: () =>
+            import('./day5/day5.routes')
+                .then(m => m.DAY5_ROUTES)
+    },
 
     {
         path: '',

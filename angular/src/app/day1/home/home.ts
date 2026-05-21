@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HighlightDirective } from '../highlight';
+import { HighlightDirective } from '../../shared/directives/highlight';
 
 @Component({
   selector: 'app-home',

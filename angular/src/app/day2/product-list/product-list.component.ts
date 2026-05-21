@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CapitalizePipe } from '../capitalize.pipe';
+import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 
 @Component({
   selector: 'app-product-list',

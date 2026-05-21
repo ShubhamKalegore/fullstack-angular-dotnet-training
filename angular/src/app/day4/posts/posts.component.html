@@ -1,0 +1,32 @@
+<h2>Posts From API</h2>
+
+<div
+  *ngIf="errorMessage"
+  class="alert alert-danger"
+>
+  {{ errorMessage }}
+</div>
+
+<ul class="list-group">
+
+  <li
+    class="list-group-item"
+    *ngFor="let post of posts"
+  >
+
+    <a
+      [routerLink]="['/day4/post', post.id]"
+      class="text-decoration-none"
+    >
+
+      <h5>
+        {{ post.id }} - {{ post.title }}
+      </h5>
+
+    </a>
+
+    <p>{{ post.body }}</p>
+
+  </li>
+
+</ul>

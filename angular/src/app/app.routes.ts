@@ -22,6 +22,13 @@ export const routes: Routes = [
         path: 'day3',
         component: Day3MainComponent
     },
+    {
+        path: 'day4',
+
+        loadChildren: () =>
+            import('./day4/day4.routes')
+                .then(m => m.DAY4_ROUTES)
+    },
 
     {
         path: '',

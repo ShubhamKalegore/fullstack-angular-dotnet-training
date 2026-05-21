@@ -1,0 +1,42 @@
+<div class="container mt-4">
+
+  <div
+    *ngIf="post"
+    class="card shadow"
+  >
+
+    <div class="card-body">
+
+      <h3 class="card-title">
+        {{ post.id }} - {{ post.title }}
+      </h3>
+
+      <hr>
+
+      <p class="card-text">
+        {{ post.body }}
+      </p>
+
+      <p>
+        <strong>User ID:</strong>
+        {{ post.userId }}
+      </p>
+
+      <p>
+        <strong>Comments:</strong>
+        {{ post.comment_count }}
+      </p>
+
+      <!-- <a
+        [href]="post.link"
+        target="_blank"
+        class="btn btn-primary"
+      >
+        Read More
+      </a> -->
+
+    </div>
+
+  </div>
+
+</div>

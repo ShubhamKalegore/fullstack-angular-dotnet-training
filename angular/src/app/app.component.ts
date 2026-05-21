@@ -42,9 +42,14 @@ export class AppComponent {
   }
 
   navigateDay() {
+    this.showContentDay = true;
     this.useAngularTrainingDays();
     this.syncTrainingDayWithContentDay();
-    this.router.navigate([this.selectedDay]);
+    const route = this.selectedDay === 'day4'
+      ? ['day4', 'dashboard']
+      : [this.selectedDay];
+
+    this.router.navigate(route);
   }
 
   navigateTrainingDay() {

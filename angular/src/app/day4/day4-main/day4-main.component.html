@@ -1,0 +1,43 @@
+<div class="container mt-4">
+
+  <h2 class="text-primary mb-4">
+    Day 4 - Routing Dashboard
+  </h2>
+
+  <div class="form-check form-switch mb-4">
+
+    <input
+      class="form-check-input"
+      type="checkbox"
+      id="protectRoutes"
+      [(ngModel)]="authService.protectRoutes"
+    >
+
+    <label
+      class="form-check-label"
+      for="protectRoutes"
+    >
+      Protect Child Routes
+    </label>
+
+  </div>
+
+  <a
+    routerLink="/day4/dashboard"
+    class="btn btn-outline-primary me-2"
+  >
+    Dashboard
+  </a>
+
+  <a
+    routerLink="/day4/posts"
+    class="btn btn-outline-success"
+  >
+    Posts
+  </a>
+
+  <hr>
+
+  <router-outlet></router-outlet>
+
+</div>

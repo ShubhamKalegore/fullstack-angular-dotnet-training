@@ -25,4 +25,16 @@ export class PostService {
 
     );
   }
+
+  getPostById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/posts/${id}`).pipe(
+      catchError(error => {
+
+        console.error('API Error:', error);
+
+        return throwError(() => error);
+
+      })
+    );
+  }
 }

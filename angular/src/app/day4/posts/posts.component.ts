@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { PostService } from '../../shared/services/post.service';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })

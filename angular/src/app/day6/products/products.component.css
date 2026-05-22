@@ -1,0 +1,10 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.products-panel {
+  width: 100%;
+  max-width: 760px;
+}

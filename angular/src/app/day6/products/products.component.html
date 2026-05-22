@@ -1,0 +1,109 @@
+<div class="products-panel border rounded p-4 bg-light">
+
+  <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+
+    <h3 class="mb-0">
+      Product List
+    </h3>
+
+    <span class="badge text-bg-primary">
+      Total: {{ productsCount$ | async }}
+    </span>
+
+  </div>
+
+  <form
+    class="row g-2 mb-4"
+    (ngSubmit)="addProduct()"
+  >
+
+    <div class="col-md-5">
+      <input
+        type="text"
+        name="productName"
+        class="form-control"
+        placeholder="Product name"
+        [(ngModel)]="productName"
+      >
+    </div>
+
+    <div class="col-md-4">
+      <input
+        type="number"
+        name="productPrice"
+        class="form-control"
+        placeholder="Price"
+        [(ngModel)]="productPrice"
+      >
+    </div>
+
+    <div class="col-md-3 d-grid">
+      <button
+        type="submit"
+        class="btn btn-success"
+      >
+        Add Product
+      </button>
+    </div>
+
+  </form>
+
+  <div
+    *ngIf="products$ | async as products"
+    class="list-group"
+  >
+
+    <div
+      *ngFor="let product of products"
+      class="list-group-item d-flex align-items-center justify-content-between gap-3 flex-wrap"
+    >
+
+      <div>
+        <div class="fw-semibold">
+          {{ product.name }}
+        </div>
+
+        <div class="text-muted small">
+          {{ product.price | currency:'INR' }} -
+          {{ product.inStock ? 'In stock' : 'Out of stock' }}
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button
+          type="button"
+          class="btn btn-outline-primary btn-sm"
+          (click)="toggleStock(product.id)"
+        >
+          Toggle Stock
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline-danger btn-sm"
+          (click)="removeProduct(product.id)"
+        >
+          Remove
+        </button>
+      </div>
+
+    </div>
+
+    <p
+      *ngIf="products.length === 0"
+      class="text-muted mb-0"
+    >
+      No products available.
+    </p>
+
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-secondary mt-3"
+    (click)="clearProducts()"
+  >
+    Clear Products
+  </button>
+
+</div>

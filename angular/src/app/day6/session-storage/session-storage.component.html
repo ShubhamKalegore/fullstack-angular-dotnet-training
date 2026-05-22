@@ -1,0 +1,125 @@
+<div class="session-panel border rounded p-4 bg-light">
+
+  <h3 class="mb-3">
+    Session Storage Info
+  </h3>
+
+  <form
+    class="row g-3 mb-4"
+    (ngSubmit)="saveToSessionStorage()"
+  >
+
+    <div class="col-md-4">
+      <label
+        class="form-label"
+        for="sessionName"
+      >
+        Name
+      </label>
+
+      <input
+        id="sessionName"
+        type="text"
+        name="name"
+        class="form-control"
+        [(ngModel)]="userInfo.name"
+      >
+    </div>
+
+    <div class="col-md-4">
+      <label
+        class="form-label"
+        for="sessionEmail"
+      >
+        Email
+      </label>
+
+      <input
+        id="sessionEmail"
+        type="email"
+        name="email"
+        class="form-control"
+        [(ngModel)]="userInfo.email"
+      >
+    </div>
+
+    <div class="col-md-4">
+      <label
+        class="form-label"
+        for="sessionRole"
+      >
+        Role
+      </label>
+
+      <input
+        id="sessionRole"
+        type="text"
+        name="role"
+        class="form-control"
+        [(ngModel)]="userInfo.role"
+      >
+    </div>
+
+    <div class="col-12 d-flex gap-2 flex-wrap">
+      <button
+        type="submit"
+        class="btn btn-success"
+      >
+        Save
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="loadFromSessionStorage()"
+      >
+        Load
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="clearSessionStorage()"
+      >
+        Clear
+      </button>
+    </div>
+
+  </form>
+
+  <p
+    *ngIf="message"
+    class="alert alert-info mb-4"
+  >
+    {{ message }}
+  </p>
+
+  <div
+    *ngIf="savedUserInfo"
+    class="saved-info border rounded bg-white p-3"
+  >
+    <h4 class="h5 mb-3">
+      Saved Info
+    </h4>
+
+    <p class="mb-1">
+      <strong>Name:</strong> {{ savedUserInfo.name }}
+    </p>
+
+    <p class="mb-1">
+      <strong>Email:</strong> {{ savedUserInfo.email }}
+    </p>
+
+    <p class="mb-0">
+      <strong>Role:</strong> {{ savedUserInfo.role }}
+    </p>
+  </div>
+
+  <p
+    *ngIf="!savedUserInfo"
+    class="text-muted mb-0"
+  >
+    No info saved in session storage.
+  </p>
+
+</div>

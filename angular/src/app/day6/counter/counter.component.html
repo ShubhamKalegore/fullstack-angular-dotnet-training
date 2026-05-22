@@ -1,0 +1,39 @@
+<div class="counter-panel border rounded p-4 bg-light">
+
+  <h3 class="mb-3">
+    Counter
+  </h3>
+
+  <div class="display-5 fw-semibold mb-4">
+    {{ counter$ | async }}
+  </div>
+
+  <div class="d-flex gap-2 flex-wrap">
+
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="increment()"
+    >
+      Increment
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="decrement()"
+    >
+      Decrement
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="reset()"
+    >
+      Reset
+    </button>
+
+  </div>
+
+</div>

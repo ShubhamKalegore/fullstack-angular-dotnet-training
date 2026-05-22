@@ -1,0 +1,14 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.session-panel {
+  width: 100%;
+  max-width: 760px;
+}
+
+.saved-info {
+  max-width: 420px;
+}

@@ -10,5 +10,6 @@ export const CONTENT_DAYS: ContentDay[] = [
   { value: 'day3', label: 'Day 3' },
   { value: 'day4', label: 'Day 4' },
   { value: 'day5', label: 'Day 5' },
-  { value: 'day6', label: 'Day 6' }
+  { value: 'day6', label: 'Day 6' },
+  { value: 'day7', label: 'Day 7' }
 ];

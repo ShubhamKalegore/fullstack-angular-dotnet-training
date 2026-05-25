@@ -45,6 +45,14 @@ export const routes: Routes = [
     },
 
     {
+        path: 'day7',
+
+        loadChildren: () =>
+            import('./day7/day7.routes')
+                .then(m => m.DAY7_ROUTES)
+    },
+
+    {
         path: '',
         redirectTo: 'day0',
         pathMatch: 'full'

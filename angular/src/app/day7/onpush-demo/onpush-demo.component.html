@@ -1,0 +1,70 @@
+<div class="card p-4">
+
+  <h3 class="mb-3">
+    OnPush Change Detection with &#64;Input()
+  </h3>
+
+  <div class="row g-4">
+
+    <div class="col-md-6">
+
+      <div class="card border-primary h-100">
+
+        <div class="card-body">
+
+          <h4 class="card-title text-primary">
+            Parent Component
+          </h4>
+
+          <p class="text-muted mb-3">
+            The parent passes this object to the child using &#64;Input().
+          </p>
+
+          <div class="mb-2">
+            <strong>Name:</strong> {{ user.name }}
+          </div>
+
+          <div class="mb-3">
+            <strong>Parent count:</strong> {{ user.count }}
+          </div>
+
+          <div class="d-flex gap-2">
+
+            <button
+              class="btn btn-warning"
+              (click)="mutateSameObject()"
+            >
+              Mutate Same Object
+            </button>
+
+            <button
+              class="btn btn-primary"
+              (click)="replaceObject()"
+            >
+              Replace Object
+            </button>
+
+            <button
+              class="btn btn-outline-secondary"
+              (click)="reset()"
+            >
+              Reset
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <app-onpush-child [user]="user"></app-onpush-child>
+
+    </div>
+
+  </div>
+
+</div>

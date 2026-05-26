@@ -37,7 +37,8 @@
           id="showContentDay"
           class="form-check-input"
           type="checkbox"
-          [(ngModel)]="showContentDay"
+          [checked]="activeView() === 'content'"
+          (change)="showContent()"
         >
 
         <label
@@ -111,7 +112,8 @@
           id="showTrainingPlan"
           class="form-check-input"
           type="checkbox"
-          [(ngModel)]="showTrainingPlan"
+          [checked]="activeView() === 'training'"
+          (change)="showTraining()"
         >
 
         <label
@@ -129,7 +131,7 @@
 
   <!-- Training Plan -->
   <app-training-plan
-    *ngIf="showTrainingPlan"
+    *ngIf="activeView() === 'training'"
     [selectedDay]="selectedTrainingDay"
     [trainingDays]="trainingDays"
   >
@@ -137,7 +139,7 @@
 
   <!-- Routed Day Content -->
   <section
-    *ngIf="showContentDay"
+    *ngIf="activeView() === 'content'"
     class="content-panel border rounded bg-white shadow-sm"
   >
 

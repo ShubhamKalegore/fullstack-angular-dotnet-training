@@ -5,12 +5,41 @@ import { PostsComponent } from "./posts/posts.component";
 import { PostDetailsComponent } from "./post-details/post-details.component";
 import { authChildGuard } from "../shared/guards/auth-child.guard";
 
+// export const DAY4_ROUTES: Routes = [
+
+//   {
+//     path: '',
+//     component: Day4MainComponent,
+//     canActivateChild: [authChildGuard],
+//     children: [
+//       {
+//         path: '',
+//         redirectTo: 'dashboard',
+//         pathMatch: 'full'
+//       },
+//       {
+//         path: 'dashboard',
+//         component: DashboardComponent
+//       },
+//       {
+//         path: 'posts',
+//         component: PostsComponent
+//       },
+//       {
+//         path: 'post/:id',
+//         component: PostDetailsComponent
+//       }
+//     ]
+//   }
+
+// ];
+
+
 export const DAY4_ROUTES: Routes = [
 
   {
     path: '',
     component: Day4MainComponent,
-    canActivateChild: [authChildGuard],
     children: [
       {
         path: '',
@@ -23,11 +52,14 @@ export const DAY4_ROUTES: Routes = [
       },
       {
         path: 'posts',
-        component: PostsComponent
+        component: PostsComponent,
+        canActivate: [authChildGuard],
       },
       {
         path: 'post/:id',
-        component: PostDetailsComponent
+        component: PostDetailsComponent,
+        canActivate: [authChildGuard],
+
       }
     ]
   }

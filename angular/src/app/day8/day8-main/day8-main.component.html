@@ -1,0 +1,55 @@
+<div class="container mt-4">
+
+    <h2 class="text-primary mb-4">
+        Day 8 - Dynamic Components
+    </h2>
+
+    <div class="mb-4">
+
+        <label class="form-label">
+            Select Role
+        </label>
+
+        <select class="form-select" [(ngModel)]="selectedRole">
+
+            <option value="">
+                Select
+            </option>
+
+            <option value="admin">
+                Admin
+            </option>
+
+            <option value="user">
+                User
+            </option>
+
+        </select>
+
+    </div>
+
+    <!-- Admin Form -->
+
+    <app-admin-form *ngIf="selectedRole === 'admin'" [title]="title" (formSubmitted)="receiveFormData($event)">
+    </app-admin-form>
+
+    <!-- User Form -->
+
+    <app-user-form *ngIf="selectedRole === 'user'" [title]="title" (formSubmitted)="receiveFormData($event)">
+    </app-user-form>
+
+    <!-- Parent Received Data -->
+
+    <div *ngIf="receivedData" class="alert alert-success mt-4">
+
+        <h5>
+            Parent Received:
+        </h5>
+
+        <pre>
+            {{ receivedData | json }}
+        </pre>
+
+    </div>
+
+</div>

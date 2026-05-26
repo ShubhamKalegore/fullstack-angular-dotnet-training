@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -19,8 +19,8 @@ export class AppComponent {
   selectedDay = 'day0';
   selectedTechnology = 'angular';
   selectedTrainingDay = 'day1';
-  showContentDay = false;
-  showTrainingPlan = false;
+
+  activeView = signal<'content' | 'training' | null>(null);
   contentDays = CONTENT_DAYS;
   technologyOptions = [
     { value: 'angular', label: 'Angular' },
@@ -29,7 +29,7 @@ export class AppComponent {
   trainingDays = TRAINING_DAYS;
 
   get isControlsCentered() {
-    return !this.showContentDay && !this.showTrainingPlan;
+    return this.activeView() === null;
   }
 
   constructor(private router: Router) {
@@ -42,7 +42,7 @@ export class AppComponent {
   }
 
   navigateDay() {
-    this.showContentDay = true;
+    this.activeView.set('content');
     this.useAngularTrainingDays();
     this.syncTrainingDayWithContentDay();
     const route = this.selectedDay === 'day4'
@@ -53,6 +53,7 @@ export class AppComponent {
   }
 
   navigateTrainingDay() {
+    this.activeView.set('training');
     this.selectedDay = this.isContentDayAvailable(this.selectedTrainingDay)
       ? this.selectedTrainingDay
       : 'day0';
@@ -84,5 +85,13 @@ export class AppComponent {
     if (matchingTrainingDay) {
       this.selectedTrainingDay = matchingTrainingDay.day;
     }
+  }
+
+  showContent() {
+    this.activeView.set(this.activeView() === 'content' ? null : 'content');
+  }
+
+  showTraining() {
+    this.activeView.set(this.activeView() === 'training' ? null : 'training');
   }
 }

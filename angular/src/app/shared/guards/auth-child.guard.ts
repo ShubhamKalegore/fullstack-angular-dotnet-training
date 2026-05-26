@@ -9,7 +9,7 @@ export const authChildGuard: CanActivateChildFn = () => {
 
   if (authService.protectRoutes) {
 
-    alert('canActivateChild route guard activated, child sroutes cannot be visited');
+    alert('canActivate route guard activated, child sroutes cannot be visited');
 
     return false;
 

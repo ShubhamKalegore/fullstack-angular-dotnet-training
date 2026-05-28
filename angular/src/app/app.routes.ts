@@ -60,6 +60,14 @@ export const routes: Routes = [
     },
 
     {
+        path: 'day16',
+
+        loadChildren: () =>
+            import('./day16/day16.routes')
+                .then(m => m.DAY16_ROUTES)
+    },
+
+    {
         path: '',
         redirectTo: 'day0',
         pathMatch: 'full'

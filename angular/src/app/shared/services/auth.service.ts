@@ -20,14 +20,17 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
 
-  private apiUrl =
-    'https://localhost:7213/api/auth';
-    
+  private apiBaseUrl =
+    'https://localhost:7265/api';
+
+  private authUrl =
+    `${this.apiBaseUrl}/auth`;
+
   protectRoutes = false;
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   // Register
 
@@ -35,8 +38,11 @@ export class AuthService {
 
     return this.http
       .post(
-        `${this.apiUrl}/register`,
-        data
+        `${this.authUrl}/register`,
+        data,
+        {
+          responseType: 'text'
+        }
       )
       .pipe(
 
@@ -58,7 +64,7 @@ export class AuthService {
 
     return this.http
       .post(
-        `${this.apiUrl}/login`,
+        `${this.authUrl}/login`,
         data
       )
       .pipe(
@@ -82,6 +88,38 @@ export class AuthService {
     localStorage.removeItem('accessToken');
 
     localStorage.removeItem('refreshToken');
+
+  }
+
+  saveTokens(response: any) {
+
+    localStorage.setItem(
+      'accessToken',
+      response.accessToken
+    );
+
+    localStorage.setItem(
+      'refreshToken',
+      response.refreshToken
+    );
+
+  }
+
+  getUsers(): Observable<any> {
+
+    return this.http
+      .get(`${this.apiBaseUrl}/users`)
+      .pipe(
+
+        catchError(error => {
+
+          console.error(error);
+
+          return throwError(() => error);
+
+        })
+
+      );
 
   }
 
@@ -119,9 +157,11 @@ export class AuthService {
     }
 
     const decoded: any =
-      jwtDecode(token);
+      this.decodeToken(token);
 
-    return decoded.role;
+    return decoded.role
+      ?? decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+      ?? null;
 
   }
 
@@ -139,9 +179,12 @@ export class AuthService {
     }
 
     const decoded: any =
-      jwtDecode(token);
+      this.decodeToken(token);
 
-    return decoded.nameid;
+    return decoded.nameid
+      ?? decoded.sub
+      ?? decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+      ?? null;
 
   }
 
@@ -167,7 +210,7 @@ export class AuthService {
     }
 
     const decoded: any =
-      jwtDecode(token);
+      this.decodeToken(token);
 
     const expiry =
       decoded.exp * 1000;
@@ -182,11 +225,11 @@ export class AuthService {
 
     return this.http
       .post(
-        `${this.apiUrl}/refresh-token`,
+        `${this.authUrl}/refresh-token`,
         {
 
-          accessToken:
-            this.getAccessToken(),
+          userId:
+            this.getUserId(),
 
           refreshToken:
             this.getRefreshToken()
@@ -204,6 +247,20 @@ export class AuthService {
         })
 
       );
+
+  }
+
+  private decodeToken(token: string): any {
+
+    try {
+
+      return jwtDecode(token);
+
+    } catch {
+
+      return {};
+
+    }
 
   }
 

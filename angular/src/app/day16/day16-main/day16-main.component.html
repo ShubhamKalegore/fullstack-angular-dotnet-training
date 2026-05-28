@@ -1,1 +1,53 @@
-<p>day16-main works!</p>
+<div class="container py-4">
+
+  <div class="mb-4 d-flex flex-wrap align-items-center gap-2">
+
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      routerLink="register"
+      routerLinkActive="active-nav-button"
+    >
+      User Registration
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      routerLink="login"
+      routerLinkActive="active-nav-button"
+    >
+      User Login
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      routerLink="users"
+      routerLinkActive="active-nav-button"
+      *ngIf="authService.isLoggedIn()"
+    >
+      Fetch All Users
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline-danger ms-auto"
+      *ngIf="authService.isLoggedIn()"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+
+  </div>
+
+  <div
+    *ngIf="role"
+    class="alert alert-info"
+  >
+    Logged in role: {{ role }}
+  </div>
+
+  <router-outlet></router-outlet>
+
+</div>

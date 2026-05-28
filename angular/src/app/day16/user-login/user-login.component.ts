@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 
 import { jwtDecode } from 'jwt-decode';
 
+import { Router } from '@angular/router';
+
 import { AuthService }
   from '../../shared/services/auth.service';
 
@@ -39,7 +41,8 @@ export class UserLoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -73,29 +76,23 @@ export class UserLoginComponent implements OnInit {
 
         next: (response: any) => {
 
-          localStorage.setItem(
-            'accessToken',
-            response.accessToken
-          );
-
-          localStorage.setItem(
-            'refreshToken',
-            response.refreshToken
-          );
+          this.authService.saveTokens(response);
 
           const decodedToken: any =
             jwtDecode(response.accessToken);
 
           this.loggedInUserId =
-            decodedToken.nameid;
+            this.authService.getUserId() ?? '';
 
           this.loggedInRole =
-            decodedToken.role;
+            this.authService.getUserRole() ?? '';
 
           this.successMessage =
             'Login successful';
 
           console.log(decodedToken);
+
+          this.router.navigate(['/day16/users']);
 
         },
 

@@ -7,6 +7,7 @@
       class="btn btn-outline-primary"
       routerLink="register"
       routerLinkActive="active-nav-button"
+      *ngIf="!authService.isLoggedIn()"
     >
       User Registration
     </button>
@@ -16,18 +17,9 @@
       class="btn btn-outline-success"
       routerLink="login"
       routerLinkActive="active-nav-button"
+      *ngIf="!authService.isLoggedIn()"
     >
       User Login
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      routerLink="users"
-      routerLinkActive="active-nav-button"
-      *ngIf="authService.isLoggedIn()"
-    >
-      Fetch All Users
     </button>
 
     <button
@@ -39,13 +31,6 @@
       Logout
     </button>
 
-  </div>
-
-  <div
-    *ngIf="role"
-    class="alert alert-info"
-  >
-    Logged in role: {{ role }}
   </div>
 
   <router-outlet></router-outlet>

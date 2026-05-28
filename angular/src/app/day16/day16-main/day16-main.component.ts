@@ -36,8 +36,4 @@ export class Day16MainComponent {
     this.router.navigate(['/day16/login']);
   }
 
-  get role(): string | null {
-    return this.authService.getUserRole();
-  }
-
 }

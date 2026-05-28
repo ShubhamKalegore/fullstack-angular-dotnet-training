@@ -89,6 +89,10 @@ export class AuthService {
 
     localStorage.removeItem('refreshToken');
 
+    localStorage.removeItem('accessTokenExpiry');
+
+    localStorage.removeItem('refreshTokenExpiry');
+
   }
 
   saveTokens(response: any) {
@@ -102,6 +106,39 @@ export class AuthService {
       'refreshToken',
       response.refreshToken
     );
+
+    const accessTokenExpiry =
+      response.accessTokenExpiry
+      ?? response.accessTokenExpiration
+      ?? response.jwtTokenExpiry
+      ?? response.jwtTokenExpiration
+      ?? response.expiresAt
+      ?? response.expiration;
+
+    if (accessTokenExpiry) {
+
+      localStorage.setItem(
+        'accessTokenExpiry',
+        accessTokenExpiry
+      );
+
+    }
+
+    const refreshTokenExpiry =
+      response.refreshTokenExpiry
+      ?? response.refreshTokenExpiration
+      ?? response.refreshTokenExpiresAt
+      ?? response.refreshTokenExpires
+      ?? response.refreshTokenExpiryDate;
+
+    if (refreshTokenExpiry) {
+
+      localStorage.setItem(
+        'refreshTokenExpiry',
+        refreshTokenExpiry
+      );
+
+    }
 
   }
 
@@ -139,6 +176,58 @@ export class AuthService {
 
     return localStorage.getItem(
       'refreshToken'
+    );
+
+  }
+
+  getTokenPreview(token: string | null): string {
+
+    if (!token) {
+
+      return 'Not available';
+
+    }
+
+    if (token.length <= 30) {
+
+      return token;
+
+    }
+
+    return `${token.slice(0, 15)}...${token.slice(-15)}`;
+
+  }
+
+  getAccessTokenExpiry(): string {
+
+    const storedExpiry =
+      localStorage.getItem('accessTokenExpiry');
+
+    if (storedExpiry) {
+
+      return this.formatDate(storedExpiry);
+
+    }
+
+    return this.getJwtExpiry(
+      this.getAccessToken()
+    );
+
+  }
+
+  getRefreshTokenExpiry(): string {
+
+    const storedExpiry =
+      localStorage.getItem('refreshTokenExpiry');
+
+    if (storedExpiry) {
+
+      return this.formatDate(storedExpiry);
+
+    }
+
+    return this.getJwtExpiry(
+      this.getRefreshToken()
     );
 
   }
@@ -261,6 +350,43 @@ export class AuthService {
       return {};
 
     }
+
+  }
+
+  private getJwtExpiry(token: string | null): string {
+
+    if (!token) {
+
+      return 'Not available';
+
+    }
+
+    const decoded: any =
+      this.decodeToken(token);
+
+    if (!decoded.exp) {
+
+      return 'Not available in token';
+
+    }
+
+    return new Date(decoded.exp * 1000)
+      .toLocaleString();
+
+  }
+
+  private formatDate(value: string): string {
+
+    const date =
+      new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+
+      return value;
+
+    }
+
+    return date.toLocaleString();
 
   }
 

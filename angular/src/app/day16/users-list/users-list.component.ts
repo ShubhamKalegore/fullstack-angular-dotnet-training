@@ -83,4 +83,24 @@ export class UsersListComponent {
     return this.authService.getUserRole();
   }
 
+  get accessToken(): string {
+    return this.authService.getTokenPreview(
+      this.authService.getAccessToken()
+    );
+  }
+
+  get accessTokenExpiry(): string {
+    return this.authService.getAccessTokenExpiry();
+  }
+
+  get refreshToken(): string {
+    return this.authService.getTokenPreview(
+      this.authService.getRefreshToken()
+    );
+  }
+
+  get refreshTokenExpiry(): string {
+    return this.authService.getRefreshTokenExpiry();
+  }
+
 }

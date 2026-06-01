@@ -51,7 +51,7 @@ export class UserRegistrationComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(6)
+          Validators.minLength(5)
         ]
       ],
 

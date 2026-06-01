@@ -17,10 +17,10 @@ export const authInterceptor: HttpInterceptorFn = (request, next) => {
 
   const authRequest = token
     ? request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     : request;
 
   return next(authRequest).pipe(

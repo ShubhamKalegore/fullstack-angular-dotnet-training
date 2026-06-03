@@ -353,6 +353,32 @@ export class AuthService {
 
   }
 
+  getUserEmail(): string | null {
+
+    const token =
+      this.getAccessToken();
+
+    if (!token) {
+
+      return null;
+
+    }
+
+    const decoded: any =
+      this.decodeToken(token);
+
+    return decoded.email
+      ?? decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']
+      ?? null;
+
+  }
+
+  isAdmin(): boolean {
+
+    return this.getUserRole() === 'Admin';
+
+  }
+
   private getJwtExpiry(token: string | null): string {
 
     if (!token) {

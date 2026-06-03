@@ -1,5 +1,6 @@
 .app-shell {
   padding-top: 1.5rem;
+  padding-bottom: 5rem;
 }
 
 .controls-centered {
@@ -17,4 +18,202 @@
 .content-panel {
   padding: 1.5rem;
   margin-top: 1.5rem;
+}
+
+.user-landing {
+  padding: 1.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+}
+
+.user-landing-header,
+.learning-summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+.user-progress {
+  min-width: 6rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #e7f1ff;
+  color: #0d6efd;
+  font-weight: 700;
+  text-align: center;
+}
+
+.learning-summary {
+  grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.6fr);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: #f8f9fa;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.topic-tag {
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #ced4da;
+  font-size: 0.9rem;
+}
+
+.info-panel {
+  height: 100%;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.profile-menu {
+  position: relative;
+}
+
+.notifications-popup {
+  position: absolute;
+  top: 3.5rem;
+  right: 5rem;
+  width: min(18rem, calc(100vw - 2rem));
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background: #fff;
+  z-index: 30;
+}
+
+.icon-button,
+.footer-action {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid #0d6efd;
+  background: #0d6efd;
+  color: #fff;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+}
+
+.shell-icon,
+.footer-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: min(20rem, calc(100vw - 2rem));
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background: #fff;
+  z-index: 30;
+}
+
+.profile-info {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.empty-state {
+  padding: 1rem;
+  border: 1px dashed #ced4da;
+  border-radius: 0.5rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+.app-footer {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 20;
+}
+
+.footer-action {
+  width: 3rem;
+  height: 3rem;
+  border-color: #198754;
+  background: #198754;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.footer-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.message-panel {
+  position: absolute;
+  right: 0;
+  bottom: 4rem;
+  width: min(22rem, calc(100vw - 2rem));
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+.message-panel-header {
+  padding: 0.85rem 1rem;
+  background: #0d6efd;
+  color: #fff;
+  font-weight: 600;
+}
+
+.previous-messages {
+  display: grid;
+  gap: 0.75rem;
+  max-height: 14rem;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.message-bubble {
+  justify-self: start;
+  max-width: 82%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.5rem;
+  background: #f1f3f5;
+  color: #212529;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble-own {
+  justify-self: end;
+  background: #0d6efd;
+  color: #fff;
+}
+
+.message-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid #dee2e6;
 }

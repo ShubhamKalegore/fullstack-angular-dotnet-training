@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output
+} from '@angular/core';
 
 import {
   FormBuilder,
@@ -25,6 +30,8 @@ import { AuthService }
   styleUrls: ['./user-registration.component.css']
 })
 export class UserRegistrationComponent implements OnInit {
+
+  @Output() registrationCompleted = new EventEmitter<void>();
 
   successMessage = '';
 
@@ -110,6 +117,12 @@ export class UserRegistrationComponent implements OnInit {
             'Registration successful';
 
           this.form.reset();
+
+          setTimeout(() => {
+
+            this.registrationCompleted.emit();
+
+          }, 1000);
 
         },
 

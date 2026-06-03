@@ -1,38 +1,47 @@
 <div class="container py-4">
 
-  <div class="mb-4 d-flex flex-wrap align-items-center gap-2">
+  <div *ngIf="!authService.isLoggedIn()">
 
-    <button
-      type="button"
-      class="btn btn-outline-primary"
-      routerLink="register"
-      routerLinkActive="active-nav-button"
-      *ngIf="!authService.isLoggedIn()"
+    <div
+      class="row justify-content-center"
+      *ngIf="!showRegistrationForm"
     >
-      User Registration
-    </button>
 
-    <button
-      type="button"
-      class="btn btn-outline-success"
-      routerLink="login"
-      routerLinkActive="active-nav-button"
-      *ngIf="!authService.isLoggedIn()"
-    >
-      User Login
-    </button>
+      <div class="col-md-8 col-lg-5">
+        <app-user-login
+          (signupClicked)="showRegistration()"
+        >
+        </app-user-login>
+      </div>
 
-    <button
-      type="button"
-      class="btn btn-outline-danger ms-auto"
-      *ngIf="authService.isLoggedIn()"
-      (click)="logout()"
+    </div>
+
+    <div
+      class="row justify-content-center"
+      *ngIf="showRegistrationForm"
     >
-      Logout
-    </button>
+
+      <div class="col-md-8 col-lg-5">
+
+        <button
+          type="button"
+          class="btn btn-link px-0 mb-3"
+          (click)="showLogin()"
+        >
+          Back to login
+        </button>
+
+      <app-user-registration
+        (registrationCompleted)="showLogin()"
+      >
+      </app-user-registration>
+
+      </div>
+
+    </div>
 
   </div>
 
-  <router-outlet></router-outlet>
+  <app-users-list *ngIf="authService.isAdmin()"></app-users-list>
 
 </div>

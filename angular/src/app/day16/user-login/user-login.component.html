@@ -64,6 +64,14 @@
 
         <!-- Submit -->
 
+        <div class="mb-3">
+            <span>New user? </span>
+
+            <button type="button" class="btn btn-link p-0" (click)="signupClicked.emit()">
+                Sign up
+            </button>
+        </div>
+
         <button type="submit" class="btn btn-success" [disabled]="form.invalid">
             Login
         </button>

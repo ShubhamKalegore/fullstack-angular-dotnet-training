@@ -69,7 +69,7 @@ export const routes: Routes = [
 
     {
         path: '',
-        redirectTo: 'day0',
+        redirectTo: 'day16',
         pathMatch: 'full'
     },
 ];

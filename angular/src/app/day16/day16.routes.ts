@@ -24,12 +24,6 @@ export const DAY16_ROUTES: Routes = [
     children: [
 
       {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full'
-      },
-
-      {
         path: 'register',
         component: UserRegistrationComponent
       },

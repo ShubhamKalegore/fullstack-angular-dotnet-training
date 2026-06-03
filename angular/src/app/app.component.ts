@@ -1,9 +1,14 @@
-import { Component, signal } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  signal
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
 import { CONTENT_DAYS } from './content-days';
+import { AuthService } from './shared/services/auth.service';
 import { TrainingPlanComponent } from './training-plan/training-plan.component';
 import { DOTNET_TRAINING_DAYS, TRAINING_DAYS } from './training-plan/training-days';
 
@@ -19,8 +24,22 @@ export class AppComponent {
   selectedDay = 'day0';
   selectedTechnology = 'angular';
   selectedTrainingDay = 'day1';
+  isNotificationsOpen = false;
+  isMessagePanelOpen = false;
+  isProfileOpen = false;
+  messageText = '';
+  previousMessages = [
+    {
+      text: 'Welcome. How can we help you today?',
+      mine: false
+    },
+    {
+      text: 'You can send your message from this panel.',
+      mine: false
+    }
+  ];
 
-  activeView = signal<'content' | 'training' | null>(null);
+  activeView = signal<'content' | 'training' | null>('content');
   contentDays = CONTENT_DAYS;
   technologyOptions = [
     { value: 'angular', label: 'Angular' },
@@ -32,7 +51,15 @@ export class AppComponent {
     return this.activeView() === null;
   }
 
-  constructor(private router: Router) {
+  get selectedTrainingPlan() {
+    return this.trainingDays.find(day => day.day === this.selectedTrainingDay)
+      ?? this.trainingDays[0];
+  }
+
+  constructor(
+    private router: Router,
+    public authService: AuthService
+  ) {
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(event => {
@@ -67,7 +94,10 @@ export class AppComponent {
       : TRAINING_DAYS;
 
     this.selectedTrainingDay = this.trainingDays[0]?.day || 'day1';
-    this.navigateTrainingDay();
+  }
+
+  changeUserTrainingDay() {
+    this.activeView.set('content');
   }
 
   private isContentDayAvailable(dayValue: string) {
@@ -93,5 +123,61 @@ export class AppComponent {
 
   showTraining() {
     this.activeView.set(this.activeView() === 'training' ? null : 'training');
+  }
+
+  logout() {
+    this.authService.logout();
+    this.closePopups();
+    this.activeView.set('content');
+    this.router.navigate(['/day16']);
+  }
+
+  @HostListener('document:click')
+  closePopups() {
+    this.isNotificationsOpen = false;
+    this.isMessagePanelOpen = false;
+    this.isProfileOpen = false;
+  }
+
+  toggleNotifications(event: MouseEvent) {
+    event.stopPropagation();
+    this.isNotificationsOpen = !this.isNotificationsOpen;
+    this.isMessagePanelOpen = false;
+    this.isProfileOpen = false;
+  }
+
+  toggleProfile(event: MouseEvent) {
+    event.stopPropagation();
+    this.isProfileOpen = !this.isProfileOpen;
+    this.isNotificationsOpen = false;
+    this.isMessagePanelOpen = false;
+  }
+
+  toggleMessagePanel(event: MouseEvent) {
+    event.stopPropagation();
+    this.isMessagePanelOpen = !this.isMessagePanelOpen;
+    this.isNotificationsOpen = false;
+    this.isProfileOpen = false;
+  }
+
+  keepPopupOpen(event: MouseEvent) {
+    event.stopPropagation();
+  }
+
+  sendMessage() {
+    const message = this.messageText.trim();
+
+    if (!message) {
+      return;
+    }
+
+    this.previousMessages = [
+      ...this.previousMessages,
+      {
+        text: message,
+        mine: true
+      }
+    ];
+    this.messageText = '';
   }
 }

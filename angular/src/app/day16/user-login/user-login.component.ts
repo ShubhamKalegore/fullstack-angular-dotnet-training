@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output
+} from '@angular/core';
 
 import {
   FormBuilder,
@@ -29,6 +34,8 @@ import { AuthService }
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
+
+  @Output() signupClicked = new EventEmitter<void>();
 
   successMessage = '';
 
@@ -92,7 +99,15 @@ export class UserLoginComponent implements OnInit {
 
           console.log(decodedToken);
 
-          this.router.navigate(['/day16/users']);
+          if (this.authService.isAdmin()) {
+
+            this.router.navigate(['/day0']);
+
+            return;
+
+          }
+
+          this.router.navigate(['/day16']);
 
         },
 

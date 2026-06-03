@@ -1,7 +1,9 @@
 import {
   Component,
+  ElementRef,
   HostListener,
-  signal
+  signal,
+  ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
@@ -20,6 +22,8 @@ import { DOTNET_TRAINING_DAYS, TRAINING_DAYS } from './training-plan/training-da
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  @ViewChild('previousMessagesList') previousMessagesContainer?: ElementRef<HTMLDivElement>;
 
   selectedDay = 'day0';
   selectedTechnology = 'angular';
@@ -158,10 +162,19 @@ export class AppComponent {
     this.isMessagePanelOpen = !this.isMessagePanelOpen;
     this.isNotificationsOpen = false;
     this.isProfileOpen = false;
+
+    if (this.isMessagePanelOpen) {
+      this.scrollMessagesToBottom();
+    }
   }
 
   keepPopupOpen(event: MouseEvent) {
     event.stopPropagation();
+  }
+
+  closeMessagePanel(event: MouseEvent) {
+    event.stopPropagation();
+    this.isMessagePanelOpen = false;
   }
 
   sendMessage() {
@@ -179,5 +192,16 @@ export class AppComponent {
       }
     ];
     this.messageText = '';
+    this.scrollMessagesToBottom();
+  }
+
+  private scrollMessagesToBottom() {
+    setTimeout(() => {
+      const messagesContainer = this.previousMessagesContainer?.nativeElement;
+
+      if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    });
   }
 }

@@ -457,10 +457,27 @@
   >
 
     <div class="message-panel-header">
-      {{ authService.isAdmin() ? 'Messages' : 'Support' }}
+
+      <span>
+        {{ authService.isAdmin() ? 'Messages' : 'Support' }}
+      </span>
+
+      <button
+        type="button"
+        class="message-close"
+        aria-label="Close messages"
+        title="Close"
+        (click)="closeMessagePanel($event)"
+      >
+        &times;
+      </button>
+
     </div>
 
-    <div class="previous-messages">
+    <div
+      #previousMessagesList
+      class="previous-messages"
+    >
 
       <div
         class="message-bubble"

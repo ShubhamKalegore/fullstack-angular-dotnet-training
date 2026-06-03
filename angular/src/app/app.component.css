@@ -180,10 +180,29 @@
 }
 
 .message-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   padding: 0.85rem 1rem;
   background: #0d6efd;
   color: #fff;
   font-weight: 600;
+}
+
+.message-close {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.message-close:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .previous-messages {

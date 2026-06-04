@@ -46,6 +46,8 @@ export class UserLoginComponent implements OnInit {
   loggedInUserId = '';
   form!: FormGroup;
 
+  public showPassword = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -121,6 +123,12 @@ export class UserLoginComponent implements OnInit {
         }
 
       });
+
+  }
+
+  public togglePasswordVisibility() {
+
+    this.showPassword = !this.showPassword;
 
   }
 
